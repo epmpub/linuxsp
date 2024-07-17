@@ -17,13 +17,20 @@ void handler(int sig)
     if (sig == SIGINT)
     {
         printf("recv a sig = %d\n", sig);
+    }else if (sig == SIGQUIT)
+    {
+            sigset_t unset;
+            sigemptyset(&unset);
+            sigaddset(&unset,SIGINT);
+            sigprocmask(SIG_UNBLOCK,&unset,NULL);
     }
+    
 }
 
 void printsigset(sigset_t *set)
 {
     int i;
-    for (i = 0; i < _NSIG; ++i)
+    for (i = 1; i < 64; ++i)
     {
         if (sigismember(set, i))
         {
@@ -44,15 +51,18 @@ int main(int argc, char const *argv[])
     sigaddset(&bset,SIGINT);
 
     if (signal(SIGINT, handler) == SIG_ERR)
-        ERR_EXIT("signal error");
-    
+        ERR_EXIT("signal INT error");
+
+    if (signal(SIGQUIT, handler) == SIG_ERR)
+        ERR_EXIT("signal QUIT error");
+        
     sigprocmask(SIG_BLOCK,&bset,NULL);
     
     for (;;)
     {
         sigpending(&pset);
         printsigset(&pset);
-        sleep(1);
+        sleep(1); 
     }
 
     return 0;
