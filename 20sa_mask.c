@@ -14,22 +14,24 @@
 
 void handler(int sig)
 {
-    printf("recv a sig = %d\n", sig);
+    printf("recv sig %d\n",sig);
+    sleep(2);
 }
 
 
 int main(int argc, char const *argv[])
 {
-    printf("hello\n");
-    struct sigaction  act = {0} ;
+  
+    struct sigaction act;
     act.sa_handler = handler;
-    sigemptyset(&act.sa_mask);
-    act.sa_flags = 0;
-    if (sigaction(SIGINT,&act,NULL)<0)
-       ERR_EXIT("sigaction error");
 
+    sigemptyset(&act.sa_mask);
+    sigaddset(&act.sa_mask,SIGQUIT);
+    act.sa_flags = 0;
+
+    if(sigaction(SIGINT,&act,NULL)<0)
+        ERR_EXIT("sigaction error");
     for(;;)
         pause();
     return 0;
 }
- 
