@@ -20,7 +20,6 @@ int main(int argc, char const *argv[])
     act.sa_handler = handler;
     sigemptyset(&act.sa_mask);
     act.sa_flags = 0;
-
     sigset_t s;
     sigemptyset(&s);
     sigaddset(&s, SIGINT);
