@@ -1,6 +1,6 @@
-all: allocMem readFile 01posix_mq 02posix_mq_unlink 01posix_getattr.c 01posix_send 01posix_recv 01posix_notify
+all: echosrv_pthread.c echocli.c 
 
-EXE=allocMem readFile 01posix_mq 02posix_mq_unlink 01posix_getattr 01posix_send 01posix_recv 01posix_notify
+EXE=echosrv_pthread echocli
 
 all: $(EXE)
 
