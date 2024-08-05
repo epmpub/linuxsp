@@ -1,6 +1,6 @@
-all: echosrv_pthread.c echocli.c 
+all: timerfd01.c
 
-EXE=echosrv_pthread echocli
+EXE=timerfd01
 
 all: $(EXE)
 

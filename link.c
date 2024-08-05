@@ -28,6 +28,9 @@ void printList(struct List* head) {
     printf("NULL\n");
 }
 
+#include <stdio.h>
+printf("Hello %d", 10);
+
 
 int main() {
     struct List* head = NULL;
